@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper  namespace="com.oyo.shen.Dao.StudentDao">
+    <!--用户结果集-->
+    <!--column后面为数据库对应的值，property后面为entity封装对应的值-->
+    <resultMap id="studentMap" type="com.oyo.shen.Entity.Student">
+        <id column="id" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="sex" property="sex"></result>
+        <result column="major" property="major"></result>
+        <result column="height" property="height"></result>
+    </resultMap>
+    <!--查询所有数据并以一个list返回json -->
+    <select id="findList" resultMap="studentMap">
+    select
+    id,
+    name,
+    sex,
+    major,
+    height
+    from
+    student_info
+    </select>
+    <!--通过学生id查询一整天-->
+    <select id="findStudentById" resultMap="studentMap" parameterType="java.lang.Integer">
+        select
+        *
+        from
+        student_info
+        where
+        id=#{id}
+    </select>
+    <delete id="delete" parameterType="com.oyo.shen.Entity.Student">
+        delete from student_info where id=#{id}
+    </delete>
+    <!--以列表的形式添加一条数据-->
+    <insert id="insertList" parameterType="com.oyo.shen.Entity.Student" useGeneratedKeys="true" keyProperty="id">
+    insert into
+    student_info(id,name,sex,major,height)
+    values
+        (#{id},#{name},#{sex},#{major},#{height})
+    </insert>
+    <!--根据id更新整条数据-->
+    <update id="updateList" parameterType="com.oyo.shen.Entity.Student">
+
+        update student_info a set
+        a.name=#{name},
+        a.sex=#{sex},
+        a.major=#{major},
+        a.height=#{height}
+        where a.id=#{id}
+    </update>
+</mapper>
+
+
