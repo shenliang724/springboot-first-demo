@@ -15,7 +15,7 @@ public class BeanValidators {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     public static void validateWithException(Validator validator, Object object, Class<?>... groups)
             throws ConstraintViolationException {
-       Set constraintViolations = validator.validate(object,groups);
+        Set constraintViolations = validator.validate(object,groups);
         if (!constraintViolations.isEmpty()) {
             throw new ConstraintViolationException(constraintViolations);
         }

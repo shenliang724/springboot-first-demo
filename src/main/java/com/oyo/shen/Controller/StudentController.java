@@ -75,5 +75,12 @@ public class StudentController extends BaseController {
             return VResponse.success("更新成功");
         }
 
-
+    @PostMapping(value = "/updateList1")
+    public VResponse<Object> updateList1(@RequestBody Student student,Model model){
+        if (!beanValidator(model,student)){
+            return formList(student);
+        }
+        studentService.updateList(student);
+        return VResponse.success("更新成功");
+    }
 }
